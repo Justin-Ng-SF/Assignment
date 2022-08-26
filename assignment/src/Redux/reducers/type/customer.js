@@ -1,8 +1,12 @@
 const initState = {
   transactionList: [],
   totalRewardPoints: 0,
-  rewardPointsByLastThreeMonths: {},
-  lastUpdated: {}, 
+  rewardPointsByLastThreeMonths: {
+    month1Points: 0,
+    month2Points: 0,
+    month3Points: 0
+  },
+  lastUpdated: '', 
   isLoading: false,
   error: ''
 }
@@ -20,9 +24,14 @@ const customer = (state = initState, action) => {
         ...state,
         transactionList: [
           ...state.transactionList, 
-          {transaction: payload}
+          {...payload}
         ],
-        totalRewardPoints: state.totalRewardPoints+payload.rewardPoints, 
+        totalRewardPoints: state.totalRewardPoints + payload.rewardPoints, 
+        rewardPointsByLastThreeMonths: {
+          ...state.rewardPointsByLastThreeMonths,
+          month1Points: state.rewardPointsByLastThreeMonths.month1Points + payload.rewardPoints
+        },
+        lastUpdated: payload.date, 
         isLoading: false
       }
     case 'CONFRIRM_TRANSACTION_FAIL':
@@ -39,9 +48,7 @@ const customer = (state = initState, action) => {
     case 'GET_TRANSACTION_SUCCESS':
       return {
         ...state,
-        transactionList: [
-          ...payload.transactionList
-        ],
+        transactionList: payload.transactionList,
         totalRewardPoints: payload.totalRewardPoints, 
         rewardPointsByLastThreeMonths: payload.rewardPointsByLastThreeMonths,
         lastUpdated: payload.lastUpdated,

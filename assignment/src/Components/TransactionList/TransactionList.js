@@ -2,7 +2,7 @@
 Display list of all transactions owned by customer
 */
 
-import { useEffect } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Transaction from "../Transaction/Transaction"
@@ -11,29 +11,35 @@ import './style.css'
 
 import * as transaction from '../../Redux/actions/transaction'
 
-const TransactionList = ({ transactionList, getTransactions }) => {
-  useEffect(() => {
-    getTransactions()
-  }, [])
+class TransactionList extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
 
-  return (
-    <div className='TransactionList'>
-      <h2>Transactions</h2>
-      <div className='transactionContainer'>
-        <span>Transaction ID</span>
-        <span>Value</span>
-        <span>Points Awarded</span>
-        <span>Transaction Date</span>
+  componentDidMount() {
+    this.props.getTransactions()
+  }
+
+  render() {
+    return (
+      <div className='TransactionList'>
+        <h2>Transactions</h2>
+        <div className='transactionContainer'>
+          <span>Transaction ID</span>
+          <span>Value</span>
+          <span>Points Awarded</span>
+          <span>Transaction Date</span>
+        </div>
+        {this.props.transactionList.map((transaction, index) => (
+          <Transaction key={index} transaction={transaction} />
+        ))}
       </div>
-      {transactionList.map((transaction, index) => (
-        <Transaction key={index} props={transaction} />
-      ))}
-    </div>
-  )
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     transactionList: state.customer.transactionList
   }

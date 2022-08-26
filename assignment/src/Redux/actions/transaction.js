@@ -16,9 +16,10 @@ export const confirmTransaction = transactionValue => async dispatch => {
       id: Math.random().toString(16).slice(2),
       transactionValue,
       rewardPoints: calculateRewardPoints(transactionValue),
-      date: (new Date().toUTCString).toString()
+      date: (new Date()).toUTCString()
     }
 
+    
     //async call to send new transaction to db here
 
     dispatch({
@@ -47,13 +48,12 @@ export const getTransactions = () => async dispatch => {
 
     const transactions = transactionObject.transactions
 
-    const today = new Date()
     const month1 = new Date()
     const month2 = new Date()
     const month3 = new Date()
-    let month1points = 0
-    let month2points = 0
-    let month3points = 0
+    let month1Points = 0
+    let month2Points = 0
+    let month3Points = 0
     let totalRewardPoints = 0
 
     month1.setMonth(month1.getMonth() - 1)
@@ -65,13 +65,13 @@ export const getTransactions = () => async dispatch => {
 
       switch (true) {
         case (Date.parse(transaction.date) > Date.parse(month1)): 
-          month1points += Number(transaction.rewardPoints)
+          month1Points += Number(transaction.rewardPoints)
           break
         case (Date.parse(transaction.date) > Date.parse(month2)): 
-          month2points += Number(transaction.rewardPoints)
+          month2Points += Number(transaction.rewardPoints)
           break
         case (Date.parse(transaction.date) > Date.parse(month3)): 
-        month3points += Number(transaction.rewardPoints)
+          month3Points += Number(transaction.rewardPoints)
           break
         default: 
           break
@@ -84,11 +84,11 @@ export const getTransactions = () => async dispatch => {
         transactionList: transactions,
         totalRewardPoints,
         rewardPointsByLastThreeMonths: {
-          month1points,
-          month2points,
-          month3points
+          month1Points,
+          month2Points,
+          month3Points
         },
-        lastUpdated: today
+        lastUpdated: (new Date()).toUTCString()
       }
     })
   } catch (error) {

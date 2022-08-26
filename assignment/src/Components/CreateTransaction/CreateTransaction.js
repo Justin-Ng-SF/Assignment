@@ -1,21 +1,27 @@
 /*
 for the sole purpose of adding custom transactions
 */
-
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import * as transaction from '../../Redux/actions/transaction'
 
 import './style.css'
 
-const CreateTransaction = ({confirmTransaction}) => {
-  return (
-    <div className='CreateTransaction'>
+class CreateTransaction extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
+  render() {
+    return (
+      <div className='CreateTransaction'>
       <form
         className='transactionForm'
         onSubmit={(e) => {
           e.preventDefault()
-          confirmTransaction(Number(e.target.transactionInput.value))
+          this.props.confirmTransaction(Number(e.target.transactionInput.value))
         }}
       >
         <input
@@ -29,8 +35,10 @@ const CreateTransaction = ({confirmTransaction}) => {
           />
         </form>
     </div>
-  )
+    )
+  }
 }
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
