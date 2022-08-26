@@ -1,5 +1,8 @@
 const initState = {
-  transactionList: {},
+  transactionList: [],
+  totalRewardPoints: 0,
+  rewardPointsByLastThreeMonths: [],
+  lastUpdated: {}, 
   isLoading: false,
   error: ''
 }
@@ -15,10 +18,11 @@ const customer = (state = initState, action) => {
     case 'CONFRIRM_TRANSACTION_SUCCESS':
       return {
         ...state,
-        transactionList: {
+        transactionList: [
           ...state.transactionList, 
-          transaction: payload
-        },
+          {transaction: payload}
+        ],
+        totalRewardPoints: state.totalRewardPoints+payload.rewardPoints, 
         isLoading: false
       }
     case 'CONFRIRM_TRANSACTION_FAIL':

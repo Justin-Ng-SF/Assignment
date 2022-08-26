@@ -1,3 +1,7 @@
+/*
+for the sole purpose of adding custom transactions
+*/
+
 import { connect } from 'react-redux'
 
 import * as transaction from '../../Redux/actions/transaction'
