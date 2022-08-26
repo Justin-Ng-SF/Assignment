@@ -1,5 +1,4 @@
 const Transaction = ({ props }) => {
-  console.log(props)
   return (
     <div className='Transaction transactionContainer'>
       <span>{props.id}</span>

@@ -37,6 +37,7 @@ const mapDispatchToProps = (dispatch) => {
     confirmTransaction: transactionInfo => {
       dispatch(transaction.confirmTransaction(transactionInfo))
     },
-  };
-};
+  }
+}
+
 export default connect(null, mapDispatchToProps)(CreateTransaction)
