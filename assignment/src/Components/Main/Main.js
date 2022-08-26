@@ -11,18 +11,17 @@ class Main extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className='Main'>
       <h3>
         <span>
-         1
+          {`Month 1 Points: ${this.props.month1Points} `}
         </span>
         <span>
-          2
+        {`Month 2 Points: ${this.props.month2Points} `}
         </span>
         <span>
-          3
+        {`Month 3 Points: ${this.props.month3Points} `}
         </span>
       </h3>
       <CreateTransaction/>

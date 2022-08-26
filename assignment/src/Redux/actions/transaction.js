@@ -43,9 +43,8 @@ export const getTransactions = () => async dispatch => {
     payload: {}
   })
   try {
-    //async call herec
-    await setTimeout(() => {}, 50)
 
+    //async call here
     const transactions = transactionObject.transactions
 
     const month1 = new Date()
@@ -59,6 +58,7 @@ export const getTransactions = () => async dispatch => {
     month1.setMonth(month1.getMonth() - 1)
     month2.setMonth(month2.getMonth() - 2)
     month3.setMonth(month3.getMonth() - 3)
+
 
     transactions.forEach((transaction) => {
       totalRewardPoints += Number(transaction.rewardPoints)

@@ -4,6 +4,7 @@ Display list of all transactions owned by customer
 
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import Spinner from 'react-bootstrap/Spinner';
 
 import Transaction from "../Transaction/Transaction"
 
@@ -23,7 +24,8 @@ class TransactionList extends Component {
 
   render() {
     return (
-      <div className='TransactionList'>
+
+      <div div className = 'TransactionList' >
         <h2>Transactions</h2>
         <div className='transactionContainer'>
           <span>Transaction ID</span>
@@ -31,16 +33,24 @@ class TransactionList extends Component {
           <span>Points Awarded</span>
           <span>Transaction Date</span>
         </div>
-        {this.props.transactionList.map((transaction, index) => (
-          <Transaction key={index} transaction={transaction} />
-        ))}
+        {this.props.isLoading ?
+          <Spinner /> :
+          <div>
+            {this.props.transactionList.map((transaction, index) => (
+            <Transaction key={index} transaction={transaction} />
+            ))}
+          </div>
+        }
+        
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
+    isLoading: state.customer.isLoading,
     transactionList: state.customer.transactionList
   }
 }
