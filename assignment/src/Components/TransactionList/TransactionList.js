@@ -1,7 +1,3 @@
-/*
-Display list of all transactions owned by customer
-*/
-
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import Spinner from 'react-bootstrap/Spinner';
@@ -25,7 +21,7 @@ class TransactionList extends Component {
   render() {
     return (
 
-      <div div className = 'TransactionList' >
+      <div className = 'TransactionList' >
         <h2>Transactions</h2>
         <div className='transactionContainer'>
           <span>Transaction ID</span>
