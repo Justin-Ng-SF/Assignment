@@ -1,17 +1,25 @@
-export const confirmTransaction = sortType => async dispatch => {
+export const confirmTransaction = transactionInfo => async dispatch => {
   dispatch({
     type: 'CONFRIRM_TRANSACTION_START',
     payload: {}
   })
   try {
+    if (isNaN(transactionInfo) || transactionInfo===0) {
+      throw new Error('Input is not a number')
+      
+    }
+
     dispatch({
       type: 'CONFRIRM_TRANSACTION_SUCCESS',
-      payload: sortType
+      payload: transactionInfo
     })
   } catch (error) {
+    console.log(error)
     dispatch({
       type: 'CONFRIRM_TRANSACTION_FAIL',
-      payload: { errorMsg: error.response.statusText, status: error.response.status }
+      payload: {
+        error
+      }
     })
   }
 }
